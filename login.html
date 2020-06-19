@@ -534,12 +534,12 @@
         <!--My Account Content Area Start-->  
   <!-- breadcrumb -->
   <div class="bread-crumb bgwhite flex-w p-l-52 p-r-15 p-t-30 p-l-15-sm">
-    <a class="s-text16" href="/" title="Back to the frontpage">
-      Home<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
+    <a class="s-text16" href="index.html" title="Quay lại trang chủ">
+      Trang chủ<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
     </a>
     
   
-    <a class="s-text16" href=""><span>Account</span></a>
+    <a class="s-text16" href=""><span>Tài khoản</span></a>
     
   </div>
   <!--End Breadcumb area -->
@@ -552,7 +552,7 @@
           
           <div class="alert alert-danger" style="display:none;">
             <i class="fa fa-exclamation-circle"></i>
-            Warning: No match for E-Mail Address and/or Password.
+            Email hoặc mật khẩu không hợp lệ.
           </div>
         </div>
         <div class="row">
@@ -585,10 +585,17 @@
                 <a rel="nofollow" href="#" onclick="showRecoverPasswordForm();return false;">Quên mật khẩu?</a>
               </div>
               
-              <p class="submit">			
-                <input type="submit" value="Sign In" class="btn btn-primary" />
-                or <a class="btn-acct" href="index.html">Quay lại trang chủ</a>
-              </p>
+              <div class="submit">					
+				<button name="account" id="button-account" type="submit" class="btn btn-primary">
+				  <span>
+					<i class="fa fa-user left"></i>
+					Đăng nhập
+				  </span>
+				</button>
+				 &nbsp;
+				hoặc <a class="btn-acct" href="index.html">Quay lại trang chủ</a>
+	  
+			  </div>
               <input type="hidden" name="return_url" value="/account?fbclid=IwAR0RfYye78Euj9UE7zQjN_9LmdBkCNbOzVpnvBd8NVXeZpPOz0fuuUknKT8" /></form>
               
               <div id="recover_password"  style="display: none;">

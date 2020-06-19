@@ -549,14 +549,13 @@ Trang chủ<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
       <div id="content" class="col-sm-12">
         <h1>Tạo tài khoản</h1>
 
-        <form action="/submitcreate" method=post oninput='customer[repeat-password].setCustomValidity(customer[repeat-password].value != customer[password].value ? "Mật khẩu không khớp" : "")'>
 
-        <form method="post" action="/account" id="create_customer" accept-charset="UTF-8"><input type="hidden" name="form_type" value="create_customer" /><input type="hidden" name="utf8" value="✓" />
+        <form method="post" action="account.php" id="create_customer" accept-charset="UTF-8"><input type="hidden" name="form_type" value="create_customer" /><input type="hidden" name="utf8" value="✓" />
         <div  id="create-account-form " >
           <fieldset id="account" class="form-horizontal">
             <legend>Thông tin về bạn</legend>
             <div class="form-group required">
-              <label  class="col-sm-2 control-label" for="first_name">Họ và tên</label>
+              <label  class="col-sm-2 control-label" for="name">Họ và tên</label>
               <div class="col-sm-10">
                 <input type="text" value="" name="customer[name]" id="name" placeholder="Họ và tên"  class="form-control"  autofocus>
               </div>
@@ -589,20 +588,20 @@ Trang chủ<i class="fa fa-angle-right m-l-8 m-r-9" aria-hidden="true"></i>
             <p><label> <input type=checkbox> Tôi đồng ý với các <a href="term-and-privacy.html">điều khoản</a>.</label></p>
           </fieldset>
           <div class="submit">					
-            <button name="submitcreate" id="button-account" type="submit" class="btn btn-primary">
+            <button name="account" id="button-account" type="submit" class="btn btn-primary">
               <span>
                 <i class="fa fa-user left"></i>
                 Tạo mới
               </span>
             </button>
-            &nbsp;
+             &nbsp;
             hoặc <a class="btn-acct" href="index.html">Quay lại trang chủ</a>
   
           </div>
         </div>
         <div class="container signin">
             Bạn đã có tài khoản?
-            <button name="login" id="button-login" type="button" class="btn btn-light">
+            <button name="login" id="button-login" type="button" class="btn ion-ios-rose">
                 <span>
                     <i class="fa fa-user-secret right-auto">
                         <a href="login.html">Đăng nhập</a>
