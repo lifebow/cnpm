@@ -419,9 +419,10 @@
             <div class="form-group required">
                 <label  class="col-sm-2 control-label" for="password">Nhập lại mật khẩu</label>
                 <div class="col-sm-10">
-                  <input type="password" value="" name="customer[repeat-password]" id="repeat-password" placeholder="Nhập lại mật khẩu"  class="form-control" >
+                  <input type="password" value="" name="customer[repeat-password]" id="repeat-password" oninput="checkRepeat()" placeholder="Nhập lại mật khẩu"  class="form-control" >
                 </div>
-            </div>
+			</div>
+			<p id="noticeChecking"></p>
             <p><label> <input type=checkbox> Tôi đồng ý với các <a href="term-and-privacy.html">điều khoản</a>.</label></p>
           </fieldset>
           <div class="submit">					
@@ -435,7 +436,20 @@
             hoặc <a class="btn-acct" href="index.html">Quay lại trang chủ</a>
   
           </div>
-        </div>
+		</div>
+		<script>
+			function checkRepeat() {
+  				var pass, repeatPass, val;
+  				pass=document.getElementById("create-password").value;
+  				repeatPass=document.getElementById("repeat-password").value;
+  				if(repeatPass != pass){
+  						val = "Mật khẩu không đúng!"
+				  } else {
+					  val = "";
+				  }
+  				document.getElementById("noticeChecking").innerHTML = val;
+			}
+		</script>
         <div class="container signin">
             Bạn đã có tài khoản?
             <button name="login" id="button-login" type="button" class="btn ion-ios-rose">

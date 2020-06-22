@@ -477,9 +477,10 @@
                         <div class="form-group required">
                             <label  class="control-label" for="password">Nhập lại mật khẩu mới</label>
                             <div class="col-sm-10">
-                              <input type="password" value="" name="customer[repeat-password]" id="repeat-password" placeholder="Nhập lại mật khẩu mới"  class="form-control" >
+                              <input type="password" value="" name="customer[repeat-password]" id="repeat-password" oninput="checkRepeat()" placeholder="Nhập lại mật khẩu mới"  class="form-control" >
                             </div>
-                        </div>
+						</div>
+						<p id="noticeChecking"></p>
                         <div class="submit">					
                             <button name="change-password" id="button-change-password" type="submit" class="btn btn-primary">
                               <span>
@@ -487,7 +488,20 @@
                                 Xác nhận
                               </span>
                             </button>
-                        </div>
+						</div>
+						<script>
+							function checkRepeat() {
+								  var pass, repeatPass, val;
+								  pass=document.getElementById("create-password").value;
+								  repeatPass=document.getElementById("repeat-password").value;
+								  if(repeatPass != pass){
+								  val = "Mật khẩu không đúng!"
+								  } else {
+									  val = "";
+								  }
+								  document.getElementById("noticeChecking").innerHTML = val;
+							}
+						</script>
                     </div>
                 </div>
             </div>
