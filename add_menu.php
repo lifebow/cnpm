@@ -80,6 +80,7 @@ if ($allowUpload) {
 
             $result=mysqli_query($conn,"call addfood('$image','$name','$description','$price')");
             $check=mysqli_fetch_array($result);
+            var_dump($check);
             if(!is_null($check)){
                 if($check[0]==-1){
                     echo "Món ăn đã tồn tại!";
@@ -91,7 +92,7 @@ if ($allowUpload) {
             }
             else{
                 echo "Error to call function";
-                unlink(($target_dir));
+                unlink(($target_dir.$image));
             }
     }
     else

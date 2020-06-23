@@ -1,4 +1,13 @@
 <?php 
+	function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+	}
 	if($_SERVER['REQUEST_METHOD'] == 'POST') {
 	
 		if(isset($_POST['customer'])){
@@ -21,13 +30,21 @@
 				header("refresh: 1;url=./login.html");
 			}
 			else{
-				$role=$check['role1'];
+				// $role=$check['role1'];
 				session_start();
 				$_SESSION['loggedin']=true;
-				$_SESSION['email']=$email;
-				$_SESSION['user_id']=$user_id;
-				$_SESSION['role']=$role;
-				header("refresh: 1;url=./vendorOwner.php");
+				$value=generateRandomString();
+				$_SESSION['value']=$value;
+				$result=mysqli_query($conn,"select * from sessionlogin where user_id='$user_id'");
+				$check=mysqli_fetch_array($result);
+				if(is_null($check['user_id'])){
+					$result=mysqli_query($conn,"Insert into sessionlogin(user_id,value) values ('$user_id','$value')");
+				}
+				else{
+					$result=mysqli_query($conn,"update sessionlogin set value='$value' where user_id='$user_id'");
+				}
+				//$_SESSION['role']=$rol/e;
+				header("refresh: 1;url=./index.html");
 			}
 		}
 	}

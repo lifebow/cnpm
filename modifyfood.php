@@ -26,19 +26,7 @@
              }
             
             
-            // if(!is_null($check)){
-            //     if($check[0]==-1){
-            //         echo "Món ăn đã tồn tại!";
-            //         unlink(($target_dir));
-            //     }
-            //     else{
-            //         echo "Thành công!";
-            //     }
-            // }
-            // else{
-            //     echo "Error to call function";
-            //     unlink(($target_dir));
-            // }
+        
 	}
 	else{
 		$filename=$_FILES['file']['name'];

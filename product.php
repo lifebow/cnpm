@@ -1,5 +1,16 @@
 <?php 
 	session_start();
+	$conn=mysqli_connect("localhost","root","root");
+	if(!$conn){
+		die(mysql_error());
+	}
+	$value=$_SESSION['value'];
+	$result=mysqli_select_db($conn,"smartfood");
+	$conn->set_charset('utf8');
+	$result=mysqli_query($conn,"call getUser_id('$value');");
+	$check=mysqli_fetch_array($result);
+	$user_id=$check['user_id'];
+	var_dump($user_id);
 	var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
@@ -94,7 +105,7 @@
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="product.php">Shop</a>
 							</li>
 
 							
@@ -102,8 +113,8 @@
 							<li>
 								<a>Features</a>
 								<ul class="sub_menu">
-									<li><a href="vendorOwner.html">for Owner</a></li>
-									<li><a href="cook.html">for Cheff</a></li>
+									<li><a href="vendorOwner.php">for Owner</a></li>
+									<li><a href="cook.php">for Cheff</a></li>
 									<li><a href="ITstaff.html">for IT Staff</a></li>
 								</ul>
 							</li>
@@ -200,7 +211,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -299,7 +310,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -368,15 +379,15 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
+						<a href="product.php">Shop</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
+						<a href="product.php">Sale</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
+						<a href="cart.php">Features</a>
 					</li>
 
 					<li class="item-menu-mobile">
@@ -579,7 +590,7 @@
 							<!-- Block2 -->
 							<div class="block2">
 								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="<?php echo "images/".$row['image'];?>"  alt="IMG-PRODUCT">
+									<img src="<?php echo "images/".$row['image'];?>" style="height: 200px;"  alt="IMG-PRODUCT">
 
 									<div class="block2-overlay trans-0-4">
 										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
@@ -604,6 +615,7 @@
 									<span class="block2-price m-text6 p-r-5">
 										<?php echo $row['price'];?>
 									</span>
+									VND
 								</div>
 							</div>
 						
@@ -834,7 +846,7 @@
 			var nameProduct = $(this).parent().parent().parent().find('.block2-name').html();
 			var name = nameProduct.slice(11,-9);
 			$(this).on('click', function(){
-				var user_id = "<?php echo $_SESSION['user_id'] ?>";
+				var user_id = "<?php echo $user_id ?>";
 			var postData = new FormData();
 			postData.append('user_id',user_id);
 			postData.append('nameProduct',name);

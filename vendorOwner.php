@@ -1,6 +1,21 @@
 
 <?php 
+	include("includes/permission_admin.php");
 	session_start();
+	$conn=mysqli_connect("localhost","root","root");
+	if(!$conn){
+		die(mysql_error());
+	}
+	$value=$_SESSION['value'];
+	$result=mysqli_select_db($conn,"smartfood");
+	$conn->set_charset('utf8');
+	$result=mysqli_query($conn,"call getUser_id('$value');");
+	$check=mysqli_fetch_array($result);
+	$user_id=$check['user_id'];
+	$result=mysqli_query($conn,"call getRole'$user_id');");
+	$check=mysqli_fetch_array($result);
+	$role=$check['role1'];
+	var_dump($role);
 	var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
@@ -68,7 +83,7 @@
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="product.php">Shop</a>
 							</li>
 
 							
@@ -76,8 +91,8 @@
 							<li>
 								<a>Features</a>
 								<ul class="sub_menu">
-									<li><a href="vendorOwner.html">for Owner</a></li>
-									<li><a href="cook.html">for Cheff</a></li>
+									<li><a href="vendorOwner.php">for Owner</a></li>
+									<li><a href="cook.php">for Cheff</a></li>
 									<li><a href="ITstaff.html">for IT Staff</a></li>
 								</ul>
 							</li>
@@ -118,7 +133,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -163,7 +178,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -206,15 +221,15 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
+						<a href="product.php">Shop</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
+						<a href="product.php">Sale</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
+						<a href="cart.php">Features</a>
 					</li>
 
 					<li class="item-menu-mobile">
@@ -598,13 +613,13 @@
                                             <div class="form-group required">
                                             <label  class="control-label" for="employee[email]">Email</label>
                                                 <div class="col-sm-10">
-                                                    <input type="text" value="" name="employee[email]" id="employee[email]" placeholder="a.nguyenvan@gmail.com"  class="form-control"  autocorrect="off" autocapitalize="off">
+                                                    <input type="email" value="" name="employee[email]" id="employee[email]" placeholder="a.nguyenvan@gmail.com"  class="form-control"  autocorrect="off" autocapitalize="off">
                                                 </div>
                                             </div>
                                             <div class="form-group required">
                                             <label  class="control-label" for="employee[password]">Mật khẩu</label>
                                                 <div class="col-sm-10">
-                                                    <input type="password" value="" name="employee[password]" id="employee[password]" placeholder="a.nguyenvan@gmail.com"  class="form-control"  autocorrect="off" autocapitalize="off">
+                                                    <input type="password" value="" name="employee[password]" id="employee[password]" placeholder="password"  class="form-control"  autocorrect="off" autocapitalize="off">
                                                 </div>
                                             </div>
                                             <div class="form-group required">

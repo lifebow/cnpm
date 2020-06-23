@@ -2,7 +2,7 @@
 	$name_food=$_POST['nameProduct'];
 	$user_id=$_POST['user_id'];
 	$conn=mysqli_connect("localhost","root","root");
-
+	var_dump($_POST);
 	if(!$conn){
 		die(mysql_error());
 	}

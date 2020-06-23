@@ -1,6 +1,20 @@
 <?php 
 	session_start();
 	var_dump($_SESSION);
+	$conn=mysqli_connect("localhost","root","root");
+	if(!$conn){
+		die(mysql_error());
+	}
+	$value=$_SESSION['value'];
+	$result=mysqli_select_db($conn,"smartfood");
+	$conn->set_charset('utf8');
+	$result=mysqli_query($conn,"call getUser_id('$value');");
+	$check=mysqli_fetch_array($result);
+	$user_id=$check['user_id'];
+	mysqli_next_result($conn);
+	$result=mysqli_query($conn,"call getRole('$user_id');");
+	$check=mysqli_fetch_array($result);
+	$role=$check['role1'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,6 +22,7 @@
 	<title>Cart</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
 	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
@@ -92,7 +107,7 @@
 							</li>
 
 							<li>
-								<a href="product.html">Shop</a>
+								<a href="product.php">Shop</a>
 							</li>
 
 							
@@ -100,8 +115,8 @@
 							<li>
 								<a>Features</a>
 								<ul class="sub_menu">
-									<li><a href="vendorOwner.html">for Owner</a></li>
-									<li><a href="cook.html">for Cheff</a></li>
+									<li><a href="vendorOwner.php">for Owner</a></li>
+									<li><a href="cook.php">for Cheff</a></li>
 									<li><a href="ITstaff.html">for IT Staff</a></li>
 								
 								</ul>
@@ -199,7 +214,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -298,7 +313,7 @@
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+									<a href="cart.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										View Cart
 									</a>
 								</div>
@@ -367,15 +382,15 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
+						<a href="product.php">Shop</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
+						<a href="product.php">Sale</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
+						<a href="cart.php">Features</a>
 					</li>
 
 					<li class="item-menu-mobile">
@@ -407,7 +422,7 @@
 			<!-- Cart item -->
 			<div class="container-table-cart pos-relative">
 				<div class="wrap-table-shopping-cart bgwhite">
-					<table class="table-shopping-cart">
+					<table class="table-shopping-cart" id="table_item">
 						<tr class="table-head">
 							<th class="column-1"></th>
 							<th class="column-2">Product</th>
@@ -417,50 +432,59 @@
 						</tr>
 						<?php
 								$conn=mysqli_connect("localhost","root","root");
-								if(!$conn){
-									die(mysql_error());
-								}
-								$result=mysqli_select_db($conn,"smartfood");
-  								$conn->set_charset('utf8');
-  								$user_id=$_SESSION['user_id'];
-  								$result=mysqli_query($conn,"call showOrderUser($user_id);");
-  								$count=1;
-  								$food = array();
-  								$num=array();
-  								while ($row=mysqli_fetch_array($result)) {
-    								$food_id=$row['food_id'];
-    								$num1=$row['num'];
-    								array_push($food, $food_id);
-    								array_push($num, $num1);
-  								}
-  								mysqli_next_result($conn);
-  								foreach (array_combine($food,$num) as $food_id=> $num1) {
-    								$result1=mysqli_query($conn,"select image,name,price from food where food_id='$food_id'");
-    									while ($row=mysqli_fetch_array($result1)) {
+  if(!$conn){
+     die(mysql_error());
+  }
+  $result=mysqli_select_db($conn,"smartfood");
+  $conn->set_charset('utf8');
+  $result=mysqli_query($conn,"call showOrderUser($user_id);");
+  $count=1;
+  $orders=array();
+  $food = array();
+  $num=array();
+  while ($row=mysqli_fetch_array($result)) {
+    $order_id=$row['orderlist_id'];
+    $food_id=$row['food_id'];
+    $num1=$row['num'];
+    array_push($food, $food_id);
+    array_push($num, $num1);
+    array_push($orders, $order_id);
+  }
+  $mi = new MultipleIterator();
+  $mi->attachIterator(new ArrayIterator($orders));
+  $mi->attachIterator(new ArrayIterator($food));
+  $mi->attachIterator(new ArrayIterator($num));
+
+  mysqli_next_result($conn);
+  foreach ($mi as $value) {
+    list($order_id,$food_id,$num)=$value;
+    $result1=mysqli_query($conn,"select image,name,price from food where food_id='$food_id'");
+    while ($row=mysqli_fetch_array($result1)) {
 								?>
 						<tr class="table-row">
+							<td class="column-0" style="display: none;"><?php echo $order_id; ?> </td>	
 							<td class="column-1">
 								<div class="cart-img-product b-rad-4 o-f-hidden">
-									<img src="<?php echo "images/".$row['image'];?>" alt="IMG-PRODUCT">
+									<img src="<?php echo "images/".$row['image'];?>" style="height: 100px; width:150px;" alt="IMG-PRODUCT">
 								</div>
 							</td>
 							<td class="column-2"><?php echo $row['name']; ?>
 								</td>
-							<td class="column-3"><?php echo $row['price']; ?></td>
+							<td class="column-3"><?php echo $row['price']; ?> VND</td>
 							<td class="column-4">
 								<div class="flex-w bo5 of-hidden w-size17">
 									<button class="btn-num-product-down color1 flex-c-m size7 bg8 eff2">
 										<i class="fs-12 fa fa-minus" aria-hidden="true"></i>
 									</button>
 
-									<input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="<?php echo $num1;?>">
+									<input class="size8 m-text18 t-center num-product" type="number" name="num-product1" value="<?php echo $num;?>">
 
 									<button class="btn-num-product-up color1 flex-c-m size7 bg8 eff2">
 										<i class="fs-12 fa fa-plus" aria-hidden="true"></i>
 									</button>
 								</div>
 							</td>
-							<td class="column-5"><?php echo $row['price']*$num1; ?></td>
+							<td class="column-5"><?php echo $row['price']*$num; ?> VND</td>
 						</tr>
 						<?php }} ?>
 
@@ -484,7 +508,7 @@
 
 				<div class="size10 trans-0-4 m-t-10 m-b-10">
 					<!-- Button -->
-					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4">
+					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" id="button-update" name="update" >
 						Update Cart
 					</button>
 				</div>
@@ -745,7 +769,43 @@
 	<div id="dropDownSelect2"></div>
 
 
+	<script>
+ $(function() {
+    //twitter bootstrap script
+    $("button#button-update").click(function(){
+    	var rows = $('#table_item> tbody > tr')
+         for (i = 1; i < rows.length; i++) {
+         	var tr=rows[i];
+         	var Order_id=tr.cells[0].innerHTML;
+         	var Quantity=tr.cells[4].getElementsByTagName("input").item(0).value;
+         	// alert(Order_id);
+         	// alert(Quantity);
+         	var postData= new FormData();
+         	postData.append('order_id',Order_id);
+         	postData.append('num',Quantity);
+         	$.ajax({
+                type:'POST',
+                url:'update_order.php',
+                processData: false,
+                contentType: false,
+                data : postData,
+                success: function(msg){
+                alert(msg);
+                },
+                error: function(){
+                    alert("failure");
+                }
+            });
 
+         }
+         
+            
+    });
+	$('.size8 m-text18 t-center num-product').on('input', function(){
+    alert('Input changed');
+	});
+});
+</script>
 <!--===============================================================================================-->
 	<script type="text/javascript" src="vendor/jquery/jquery-3.2.1.min.js"></script>
 <!--===============================================================================================-->
@@ -764,6 +824,33 @@
 		$(".selection-2").select2({
 			minimumResultsForSearch: 20,
 			dropdownParent: $('#dropDownSelect2')
+		});
+		$('input[type=number]').change(function() {
+        		var str=$(this).parent().parent().parent();
+        			str=Object.values(str)[0].cells[3].innerHTML;
+        		var num=Object.values($(this))[0].value;
+
+        		str=str.substr(0,str.length-4);
+        		var str2=$(this).parent().parent().parent()[0].cells[5];
+        		str2.innerHTML=num*str +" VND";
+		});
+		$('button[class="btn-num-product-down color1 flex-c-m size7 bg8 eff2"]').click(function() {
+        		var str=$(this).parent();
+        		var str1=Object.values(str)[0].children[1];
+        		num=parseInt(str1.value)-1;
+        		var str2=Object.values(str.parent().parent())[0];
+        		price=str2.cells[3].innerHTML;
+        		total=str2.cells[5];
+        		total.innerHTML=num*price.substr(0,price.length-4) +" VND";
+		});
+		$('button[class="btn-num-product-up color1 flex-c-m size7 bg8 eff2"]').click(function() {
+        		var str=$(this).parent();
+        		var str1=Object.values(str)[0].children[1];
+        		num=parseInt(str1.value)+1;
+        		var str2=Object.values(str.parent().parent())[0];
+        		price=str2.cells[3].innerHTML;
+        		total=str2.cells[5];
+        		total.innerHTML=num*price.substr(0,price.length-4) +" VND";
 		});
 	</script>
 <!--===============================================================================================-->
