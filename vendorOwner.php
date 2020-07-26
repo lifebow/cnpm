@@ -1,10 +1,10 @@
 
 <?php 
-	include("includes/permission_admin.php");
-	session_start();
+  session_start();
+  include("includes/permission_admin.php");
 	$conn=mysqli_connect("localhost","root","root");
 	if(!$conn){
-		die(mysql_error());
+		die(mysqli_error($conn));
 	}
 	$value=$_SESSION['value'];
 	$result=mysqli_select_db($conn,"smartfood");
@@ -15,8 +15,6 @@
 	$result=mysqli_query($conn,"call getRole'$user_id');");
 	$check=mysqli_fetch_array($result);
 	$role=$check['role1'];
-	var_dump($role);
-	var_dump($_SESSION);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +68,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
+				<a href="index.php" class="logo">
 					<img src="images/icons/logo.png" alt="IMG-LOGO">
 				</a>
 
@@ -79,7 +77,7 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="index.html">Home</a>
+								<a href="index.php">Home</a>
 							</li>
 
 							<li>
@@ -93,16 +91,15 @@
 								<ul class="sub_menu">
 									<li><a href="vendorOwner.php">for Owner</a></li>
 									<li><a href="cook.php">for Cheff</a></li>
-									<li><a href="ITstaff.html">for IT Staff</a></li>
 								</ul>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="about.php">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="contact.php">Contact</a>
 							</li>
 						</ul>
 					</nav>
@@ -111,13 +108,12 @@
 				<!-- Header Icon -->
 				<div class="header-icons">
 					
-					<li>
-						<a href="login.html">Login</a>
-					</li>
+        <?php include "./phpModules/checkLoggedIn.php"; ?>
+
 					
 					<span class="linedivide1"></span>
 
-					<a href="manageaccount.html" class="header-wrapicon1 dis-block">
+					<a href="manageaccount.php" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 					</a>
 
@@ -125,10 +121,8 @@
 
 					<div class="header-wrapicon2">
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+            <?php include "./phpModules/displayCart.php"; ?>
 
-						<!-- Header cart -->
-						<div class="header-cart header-dropdown">
 
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
@@ -140,8 +134,8 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
+									<a href="myOrder.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										My meal
 									</a>
 								</div>
 							</div>
@@ -154,7 +148,7 @@
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
-			<a href="index.html" class="logo-mobile">
+			<a href="index.php" class="logo-mobile">
 				<img src="images/icons/logo.png" alt="IMG-LOGO">
 			</a>
 
@@ -162,7 +156,7 @@
 			<div class="btn-show-menu">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="#" class="header-wrapicon1 dis-block">
+					<a href="manageaccount.html" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 					</a>
 
@@ -170,11 +164,7 @@
 
 					<div class="header-wrapicon2">
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
-
-						<!-- Header cart noti -->
-						<div class="header-cart header-dropdown">
-						
+						<?php include "./phpModules/displayCart.php"; ?>
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
@@ -185,8 +175,8 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
+									<a href="myOrder.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										My meal
 									</a>
 								</div>
 							</div>
@@ -212,9 +202,9 @@
 						</span>
 					</li>
 					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
+						<a href="index.php">Home</a>
 						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
+							<li><a href="index.php">Homepage V1</a></li>
 							
 						</ul>
 						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
@@ -225,23 +215,11 @@
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.php">Sale</a>
+						<a href="about.php">About</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="cart.php">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
+						<a href="contact.php">Contact</a>
 					</li>
 				</ul>
 			</nav>
@@ -284,7 +262,7 @@
                         	<?php
 								$conn=mysqli_connect("localhost","root","root");
 								if(!$conn){
-									die(mysql_error());
+									die(mysqli_error($conn));
 								}
 								$result=mysqli_select_db($conn,"smartfood");
 								$conn->set_charset('utf8');
@@ -535,7 +513,7 @@
                         	<?php
 								$conn=mysqli_connect("localhost","root","root");
 								if(!$conn){
-									die(mysql_error());
+									die(mysqli_error($conn));
 								}
 								$result=mysqli_select_db($conn,"smartfood");
 								$conn->set_charset('utf8');
@@ -681,17 +659,33 @@
                       <table class="table table-hover">
                           <thead>
                             <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Ngày</th>
+                              <th scope= "col">#</th>
+                              <th scope= "col">Ngày</th>
+                              <th scope= "col">Tổng số đơn</th>
                               </tr>
                           </thead>
                           <tbody>
+                          	<?php 
+                          		$conn=mysqli_connect("localhost","root","root");
+								if(!$conn){
+									die(mysqli_error($conn));
+								}
+								$result=mysqli_select_db($conn,"smartfood");
+								$conn->set_charset('utf8');
+            					$result=mysqli_query($conn,"select date(time1) as date,count(num) as num from orderlist group by 1");
+            					$stt=0;
+								while ($row=mysqli_fetch_array($result)) {
+									$stt++;
+									if($row['status2']==1){
+										continue;
+									}
+                          	 ?>
                             <tr>
-                              <th scope="row">1</th>
-                              <td><button type="button" class="btn btn-light" data-toggle="modal" data-target="#report1">
-								  24/06/2000
+                              <th scope="row"><?php echo $stt; ?></th>
+                              <td><button type="button" class="btn btn-light" data-toggle="modal" data-target="#<?php echo $row['date']; ?>">
+								  <?php echo $row['date']; ?>
 								</button>
-                                <div class="modal fade" id="report1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="<?php echo $row['date']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
                                       <div class="modal-header">
@@ -705,25 +699,46 @@
 											<thead>
 											  <tr>
 												<th scope="col">#</th>
-												<th scope="col">Hình minh họa</th>
 												<th scope="col">Tên món ăn</th>
 												<th scope="col">Số lượng</th>
 												</tr>
 											</thead>
 											<tbody>
-											  <tr>
-												  <th scope="row">1</th>
-												  <td><img src="item-01.jpg" alt="hình 1" class="img-thumbnail"></td>
-                              					  <td>Mì tôm</td>
-                              					  <td>100</td>
-											  </tr>
+												<?php
+													$conn2=mysqli_connect("localhost","root","root");
+													if(!$conn2){
+														die(mysqli_error($conn));
+													}
+													$foods=mysqli_select_db($conn2,"smartfood");
+													$conn2->set_charset('utf8');
+													$date = $row['date'];
+													$foods=mysqli_query($conn2,"select food_id, name, sum(num) as num from (select date(orderlist.time1) as date, orderlist.food_id,orderlist.num, food.name  from orderlist left join food on orderlist.food_id= food.food_id where date(orderlist.time1)='$date') as info group by food_id;");
+													$foodStt = 0;
+													while ($foodRow=mysqli_fetch_array($foods)) {
+														$foodStt++;
+														if($foodRow['status2']==1){
+															continue;
+														}
+												 	?>
+												  <tr>
+													  <th scope="row"><?php echo $foodStt; ?></th>
+	                              					  <td><?php echo $foodRow['name']; ?></td>
+	                              					  <td><?php echo $foodRow['num']; ?></td>
+												  </tr>
+												  <?php 
+													};
+											   	?>
 											</tbody>
 										</table>
 									  </div>
                                     </div>
                                   </div>
 								</div></td>
+								<td>
+									<?php echo $row['num']; ?>
+								</td>
                             </tr>
+                        <?php } ?>
                           </tbody>
                       </table>
                     </div>
@@ -742,6 +757,25 @@
                 </div>
                 <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionOne">
                     <div class="card-body">
+                    	<h5>Tặng coupon</h5>
+                    	<table class="table table-hover">
+                    		<thead>
+                    		  <tr>
+                              <th scope="col">Coupon ID</th>
+							  <th scope="col">User ID</th>
+							  <th scope="col">Số lượng</th>
+                              </tr>
+                    		</thead>
+                    		<tbody>
+                    			<tr>
+                    				<td><input type="text" style="border: 1px solid #ccc !important;" id="gift_coupon_id"></td>
+									<td><input type="text" style="border: 1px solid #ccc !important;" id="gift_user_id"></td>
+									<td><input type="text" style="border: 1px solid #ccc !important;" id="gift_num"></td>
+                    				<td><button id="button-gift-coupon" type="button" class="btn btn-primary">Tặng</button></td>
+                    			</tr>
+                    		</tbody>
+                    	</table>
+                    	<h5>Danh sách coupon</h5>
                       <table class="table table-hover">
                           <thead>
                             <tr>
@@ -755,14 +789,29 @@
                               </tr>
                           </thead>
                           <tbody>
+                          	<?php
+								$conn=mysqli_connect("localhost","root","root");
+								if(!$conn){
+									die(mysqli_error($conn));
+								}
+								$result=mysqli_select_db($conn,"smartfood");
+								$conn->set_charset('utf8');
+            					$result=mysqli_query($conn,"select * from coupon");
+            					$stt=0;
+								while ($row=mysqli_fetch_array($result)) {
+									$stt++;
+									if($row['status2']==1){
+										continue;
+									}
+								?>
                             <tr>
-                              <th scope="row">1</th>
-                              <td>QTTN-0106</td>
-                              <td>10.000VND</td>
-                              <td>25/5</td>
-                              <td>05/6</td>
-                              <!--delete coupon-->
-                              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-coupon">Xóa</button>
+                              <th scope="row"><?php echo $stt; ?></th>
+                              
+                              <!--delete coupon--><td><?php echo $row['coupon_id']; ?></td>
+                              <td><?php echo $row['value']; ?></td>
+                              <td><?php echo $row['start1']; ?></td>
+                              <td><?php echo $row['end1']; ?></td>
+                              <td><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#delete-coupon" id="button-delete-coupon">Xóa</button>
                                 <div class="modal fade" id="delete-coupon" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                   <div class="modal-dialog">
                                     <div class="modal-content">
@@ -773,7 +822,7 @@
                                         </button>
                                       </div>
                                       <div class="modal-footer">
-										  <form method="POST" action="delete-coupon" id="button-delete-coupon">
+										  <form method="POST" action="delete-coupon.php">
 											<button type="submit" class="btn btn-secondary">Xóa</button>
 										  </form>
                                           <div class="clearfix">
@@ -842,7 +891,10 @@
 									  </div>
 									</div></td>
                             </tr>
-                          </tbody>
+                            <?php
+		                      	}
+		                      ?>
+		                 </tbody>
 					  </table>
 					  
 					  <script>
@@ -901,20 +953,20 @@
                                                         <div class="form-group required">
                                                             <label  class="control-label" for="date-start">Ngày bắt đầu</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" value="" name="coupon[date-start]" id="date-start" placeholder="31/01/2000"  class="form-control"  autocorrect="off" autocapitalize="off">
+                                                                <input type="text" value="" name="coupon[date-start]" id="date-start" placeholder="YYYY-MM-DD"  class="form-control"  autocorrect="off" autocapitalize="off">
                                                             </div>
                                                         </div>
                                                         <div class="form-group required">
                                                             <label  class="control-label" for="date-end">Ngày kết thúc</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" value="" name="coupon[date-end]" id="date-end" placeholder="31/01/2000"  class="form-control"  autocorrect="off" autocapitalize="off">
+                                                                <input type="text" value="" name="coupon[date-end]" id="date-end" placeholder="YYYY-MM-DD"  class="form-control"  autocorrect="off" autocapitalize="off">
                                                             </div>                                                            
                                                         </div>
                                                     </fieldset>                                  
                                                 </div>
                                                 <div class="modal-footer">
                                                     <div class="submit">					
-                                                        <button name="account" id="button-account" type="submit" class="btn btn-primary">
+                                                        <button name="coupon" id="button-coupon" type="submit" class="btn btn-primary">
                                                         <span>
                                                             <i class="fa fa-hacker-news left"></i>
                                                                 Thêm mới
@@ -978,10 +1030,10 @@
 						<a href="#" class="s-text7">
 							Drink 
 					</li>
-					<li class="p-b-9">
+					<!-- <li class="p-b-9">
 						<div id="thanks"> aaddd</div>
 
-					</li>
+					</li> -->
 					
 				</ul>
 			</div>
@@ -1030,9 +1082,6 @@
 				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
 			</a>
 
-			<div class="t-center s-text8 p-t-20">
-				Copyright © 2018. All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-			</div>
 		</div>
 	</footer>
 
@@ -1120,9 +1169,9 @@
                 contentType: false,
                 data : postData,
                 success: function(msg){
-                alert(msg);
+                alert('Thành công');
                 $("#staticBackdrop").modal('hide');
-                header("refresh: 1;url=./vendorOwner.php");
+                location.reload();
                 },
                 error: function(){
                     alert("failure");
@@ -1142,8 +1191,8 @@
                 contentType: false,
                 data : postData,
                 success: function(msg){
-                alert(msg);
-                header("refresh: 1;url=./vendorOwner.php");
+					alert('Thành công');
+                location.reload();
                 },
                 error: function(){
                     alert("failure");
@@ -1161,9 +1210,10 @@
                 contentType: false,
                 data : postData,
                 success: function(msg){
-                alert(msg);
+					alert('Thành công');
                 $("#thanks").html(msg);
                 $("#modify-eating").modal('hide');
+                location.reload();
                 },
                 error: function(){
                     alert("failure");
@@ -1184,7 +1234,8 @@
                 contentType: false,
                 data : postData,
                 success: function(msg){
-                alert(msg);
+                location.reload();
+				alert('Thành công');
                 },
                 error: function(){
                     alert("failure");
@@ -1200,14 +1251,97 @@
                 contentType: false,
                 data : postData,
                 success: function(msg){
-                alert(msg);
+					alert('Thành công');
                 $("#staticBackdropThree").modal('hide');
+                location.reload();
                 },
                 error: function(){
                     alert("failure");
                 }
             });
     });
+    $("button#button-coupon").click( () => {
+    	var postData = new FormData($("form#add-new-coupon")[0]);
+    		$.ajax({
+    			type:'POST',
+    			url:'add-coupon.php',
+    			processData: false,
+                contentType: false,
+                data : postData,
+                success: function(msg){
+                location.reload();
+                alert("thanh cong");
+                },
+                error: function(){
+                    alert("failure");
+                }
+    		});
+    });
+    $("button#button-save-coupon").click( () => {
+        	var postData = new FormData($("form#modify-coupon")[0]);
+    		$.ajax({
+    			type:'POST',
+    			url:'modify-coupon.php',
+    			processData: false,
+                contentType: false,
+                data : postData,
+                success: function(msg){
+                location.reload();
+                alert('Thành công');
+                },
+                error: function(){
+                    alert("failure");
+                }
+    		});
+    });
+    $("button#button-delete-coupon").click(() => {
+    	var td = event.target.parentNode; 
+      	var tr = td.parentNode; // the row to be removed
+      	var id = tr.cells[1].innerHTML;
+        var postData = new FormData();
+         postData.append("coupon_id",id);
+            $.ajax({
+                type:'POST',
+                url:'delete-coupon.php',
+                processData: false,
+                contentType: false,
+                data : postData,
+                success: function(msg){
+                location.reload();
+                alert('Thành công');
+                },
+                error: function(){
+                    alert("failure");
+                }
+            });
+    });
+    $("#button-gift-coupon").click(() => {
+		var user_id  = $("#gift_user_id").val();
+		var coupon_id = $("#gift_coupon_id").val();
+		var num = $("#gift_num").val();
+		var postData = new FormData();
+		postData.append("user", user_id);
+		postData.append("coupon", coupon_id);
+		postData.append("num", num);
+		$.ajax({
+			type: 'POST',
+			url: 'gift-coupon.php',
+			processData: false,
+			contentType: false,
+			data: postData,
+			success: (msg) => {
+				location.reload();
+				alert(msg);
+			},
+			error: (error) => {
+				alert("Failure");
+			}
+
+		});
+
+    });
+
+
 });
 </script>
 

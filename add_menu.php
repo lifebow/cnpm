@@ -63,12 +63,13 @@ if (!in_array($imageFileType,$allowtypes ))
 
 // Check if $uploadOk is set to 0 by an error
 if ($allowUpload) {
+    var_dump($_FILES);
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file))
     {
         $conn=mysqli_connect("localhost","root","root");
 
             if(!$conn){
-                die(mysql_error());
+                die(mysqli_error($conn));
             }
             var_dump($_POST['eating']);
             $image=basename($_FILES["fileToUpload"]["name"]);
@@ -97,6 +98,7 @@ if ($allowUpload) {
     }
     else
     {
+
         echo "Có lỗi xảy ra khi upload file.";
     }
 }

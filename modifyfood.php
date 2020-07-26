@@ -1,13 +1,11 @@
 <?php
 	echo("ok");
-	var_dump($_POST);
-	var_dump($_FILES);
 	if($_FILES["image-description"]["name"]==""){
 		echo "Khong co hinh";
 		$conn=mysqli_connect("localhost","root","root");
 
             if(!$conn){
-                die(mysql_error());
+                die(mysqli_error($conn));
             }
             $food_id=$_POST['eating']['food_id'];
             $name=$_POST['eating']['name'];
@@ -15,7 +13,6 @@
             $price=$_POST['eating']['price'];
             $conn->set_charset('utf8');
             $result=mysqli_select_db($conn,"smartfood");
-            var_dump($food_id);
             $result=mysqli_query($conn,"select image from food where food_id='$food_id'; ");
             $check=mysqli_fetch_array($result);
             $image=$check['image'];
@@ -80,9 +77,8 @@ if ($allowUpload) {
         $conn=mysqli_connect("localhost","root","root");
 
             if(!$conn){
-                die(mysql_error());
+                die(mysqli_error($conn));
             }
-            var_dump($_POST['eating']);
             $image=basename($_FILES["image-description"]["name"]);
             $food_id=$_POST['eating']['food_id'];
             $name=$_POST['eating']['name'];
@@ -90,7 +86,6 @@ if ($allowUpload) {
             $price=$_POST['eating']['price'];
             $conn->set_charset('utf8');
             $result=mysqli_select_db($conn,"smartfood");
-            var_dump($food_id);
             $result=mysqli_query($conn,"select image from food where food_id='$food_id'; ");
             $check=mysqli_fetch_array($result);
             $oldimage=$check['image'];

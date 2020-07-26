@@ -4,7 +4,7 @@
 	session_start();
 	$conn=mysqli_connect("localhost","root","root");
 	if(!$conn){
-		die(mysql_error());
+		die(mysqli_error($conn));
 	}
 	$value=$_SESSION['value'];
 	$result=mysqli_select_db($conn,"smartfood");
@@ -12,8 +12,6 @@
 	$result=mysqli_query($conn,"call getUser_id('$value');");
 	$check=mysqli_fetch_array($result);
 	$user_id=$check['user_id'];
-	var_dump($user_id);
-	var_dump($_SESSION);
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -89,7 +87,7 @@
 
 			<div class="wrap_header">
 				<!-- Logo -->
-				<a href="index.html" class="logo">
+				<a href="index.php" class="logo">
 					<img src="images/icons/logo.png" alt="IMG-LOGO">
 				</a>
 
@@ -98,12 +96,12 @@
 					<nav class="menu">
 						<ul class="main_menu">
 							<li>
-								<a href="index.html">Home</a>
+								<a href="index.php">Home</a>
 								<!--
 								<ul class="sub_menu">
-									<li><a href="index.html">Homepage V1</a></li>
-									<li><a href="home-02.html">Homepage V2</a></li>
-									<li><a href="home-03.html">Homepage V3</a></li>
+									<li><a href="index.php">Homepage V1</a></li>
+									<li><a href="home-02.php">Homepage V2</a></li>
+									<li><a href="home-03.php">Homepage V3</a></li>
 								</ul>
 								-->
 							</li>
@@ -119,17 +117,16 @@
 								<ul class="sub_menu">
 									<li><a href="vendorOwner.php">for Owner</a></li>
 									<li><a href="cook.php">for Cheff</a></li>
-									<li><a href="ITstaff.html">for IT Staff</a></li>
 								
 								</ul>
 							</li>
 
 							<li>
-								<a href="about.html">About</a>
+								<a href="about.php">About</a>
 							</li>
 
 							<li>
-								<a href="contact.html">Contact</a>
+								<a href="contact.php">Contact</a>
 							</li>
 						</ul>
 					</nav>
@@ -138,13 +135,12 @@
 				<!-- Header Icon -->
 				<div class="header-icons">
 					
-					<li>
-						<a href="login.html">Login</a>
-					</li>
+				<?php include "./phpModules/checkLoggedIn.php"; ?>
+
 					
 					<span class="linedivide1"></span>
 
-					<a href="manageaccount.html" class="header-wrapicon1 dis-block">
+					<a href="manageaccount.php" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 					</a>
 
@@ -152,67 +148,8 @@
 
 					<div class="header-wrapicon2">
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+						<?php include "./phpModules/displayCart.php"; ?>
 
-						<!-- Header cart -->
-						<div class="header-cart header-dropdown">
-							<!--
-							<ul class="header-cart-wrapitem">
-								
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-01.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-02.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-03.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
-							
-							</ul>
-							
-							<div class="header-cart-total">
-								Total: $75.00
-							</div>
-							-->
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
@@ -223,8 +160,8 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
+									<a href="myOrder.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										My meal
 									</a>
 								</div>
 							</div>
@@ -237,7 +174,7 @@
 		<!-- Header Mobile -->
 		<div class="wrap_header_mobile">
 			<!-- Logo moblie -->
-			<a href="index.html" class="logo-mobile">
+			<a href="index.php" class="logo-mobile">
 				<img src="images/icons/logo.png" alt="IMG-LOGO">
 			</a>
 
@@ -245,7 +182,7 @@
 			<div class="btn-show-menu">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="#" class="header-wrapicon1 dis-block">
+					<a href="manageaccount.html" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 					</a>
 
@@ -253,65 +190,8 @@
 
 					<div class="header-wrapicon2">
 						<img src="images/icons/icon-header-02.png" class="header-icon1 js-show-header-dropdown" alt="ICON">
-						<span class="header-icons-noti">0</span>
+						<?php include "./phpModules/displayCart.php"; ?>
 
-						<!-- Header cart noti -->
-						<div class="header-cart header-dropdown">
-							<!--
-							<ul class="header-cart-wrapitem">
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-01.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											White Shirt With Pleat Detail Back
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $19.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-02.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Converse All Star Hi Black Canvas
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $39.00
-										</span>
-									</div>
-								</li>
-
-								<li class="header-cart-item">
-									<div class="header-cart-item-img">
-										<img src="images/item-cart-03.jpg" alt="IMG">
-									</div>
-
-									<div class="header-cart-item-txt">
-										<a href="#" class="header-cart-item-name">
-											Nixon Porter Leather Watch In Tan
-										</a>
-
-										<span class="header-cart-item-info">
-											1 x $17.00
-										</span>
-									</div>
-								</li>
-							</ul>
-
-							<div class="header-cart-total">
-								Total: $75.00
-							</div>
-							-->
 							<div class="header-cart-buttons">
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
@@ -322,8 +202,8 @@
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
+									<a href="myOrder.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
+										My meal
 									</a>
 								</div>
 							</div>
@@ -375,36 +255,24 @@
 					</li>
 					-->
 					<li class="item-menu-mobile">
-						<a href="index.html">Home</a>
+						<a href="index.php">Home</a>
 						<ul class="sub-menu">
-							<li><a href="index.html">Homepage V1</a></li>
+							<li><a href="index.php">Homepage V1</a></li>
 							
 						</ul>
 						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Shop</a>
+						<a href="product.php">Shop</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="product.html">Sale</a>
+						<a href="about.php">About</a>
 					</li>
 
 					<li class="item-menu-mobile">
-						<a href="cart.html">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.html">Blog</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="about.html">About</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="contact.html">Contact</a>
+						<a href="contact.php">Contact</a>
 					</li>
 				</ul>
 			</nav>
@@ -445,7 +313,7 @@
                         	<?php
   								$conn=mysqli_connect("localhost","root","root");
   								if(!$conn){
-     								die(mysql_error());
+     								die(mysqli_error($conn));
   								}
   								$result=mysqli_select_db($conn,"smartfood");
   								$conn->set_charset('utf8');
@@ -456,9 +324,10 @@
   								$num=array();
   								$count=1;
   								while ($row=mysqli_fetch_array($result)) {
-  									if ($row['status2']==1){
+  									if ($row['status2']==1 or $row['status2']==4 or $row['status2']==5){
   										continue;
-  									}
+									  }
+									  
   								?>
                           <tr>
                           	<td style="display: none;"><?php echo $row['orderlist_id']; ?></td>
@@ -504,7 +373,7 @@
                         	<?php
   								$conn=mysqli_connect("localhost","root","root");
   								if(!$conn){
-     								die(mysql_error());
+     								die(mysqli_error($conn));
   								}
   								$result=mysqli_select_db($conn,"smartfood");
   								$conn->set_charset('utf8');
@@ -697,9 +566,6 @@
 				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
 			</a>
 
-			<div class="t-center s-text8 p-t-20">
-				Copyright © 2018. All rights reserved. | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-			</div>
 		</div>
 	</footer>
 

@@ -4,7 +4,7 @@
 	$conn=mysqli_connect("localhost","root","root");
 	var_dump($_POST);
 	if(!$conn){
-		die(mysql_error());
+		die(mysqli_error($conn));
 	}
 	//echo "OK!<br>";
 	$conn->set_charset('utf8');
@@ -14,7 +14,7 @@
 	$food_id=$check['food_id'];
 	$num=1;
 	$time=date('Y-m-d H:i:s');
-	$status=0;
+	$status=1;
 	$result=mysqli_query($conn,"call addOrder('$user_id','$food_id','$num','$time','$status');");
 	$check=mysqli_fetch_array($result);
 	if($check[0]!=-1){

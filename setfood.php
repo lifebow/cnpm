@@ -11,7 +11,7 @@
 	$conn=mysqli_connect("localhost","root","root");
 
 	if(!$conn){
-		die(mysql_error());
+		die(mysqli_error($conn));
 	}
 	//echo "OK!<br>";
 	$conn->set_charset('utf8');

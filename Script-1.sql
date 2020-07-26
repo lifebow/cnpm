@@ -29,11 +29,12 @@ create table coupon(
 	value int,
 	primary key(coupon_id) 
 );
-
+Drop table if exists usercoupon;
 create table usercoupon(
 	id int not null auto_increment,
 	user_id int,
 	coupon_id varchar(50),
+	num int,
 	primary key(id),
 	Foreign key (user_id) references user(user_id) on delete set null,
 	Foreign key (coupon_id) references coupon(coupon_id) on delete set null
@@ -46,10 +47,35 @@ create table orderlist(
 	num int,
 	time1 datetime,
 	status2 int,
+	bill_id int,
 	primary key(orderlist_id),
 	Foreign key (user_id) references user(user_id) on DELETE set NULL,
 	Foreign key (food_id) references food(food_id) on DELETE CASCADE
 );
+Drop table if exists bill;
+create table bill(
+	bill_id int not null,
+	coupon_id varchar(50),
+	value int,
+	status int,
+	primary key(bill_id)
+);
+Drop table if exists orderlist;
+create table orderlist(
+	orderlist_id int not null AUTO_INCREMENT,
+	user_id int,
+	food_id int,
+	num int,
+	time1 datetime,
+	status2 int,
+	bill_id int,
+	primary key(orderlist_id),
+	Foreign key (user_id) references user(user_id) on DELETE set NULL,
+	Foreign key (food_id) references food(food_id) on DELETE CASCADE
+);
+
+
+
 Drop table if exists sessionlogin;
 create table sessionlogin(
 	session_id int not null AUTO_INCREMENT,
@@ -83,7 +109,7 @@ begin
 		select user_id from user where email=email1;
 	end if;
 end; $$
-DELIMITER
+DELIMITER ;
 call addUser('add','adadd','add','1234',0,1);
 
 Drop procedure if Exists modifyUser;
@@ -107,7 +133,7 @@ begin
 		select 1;
 	end if;
 end; $$
-DELIMITER
+DELIMITER ;
 
 Drop procedure if Exists deleteUser;
 Delimiter $$
@@ -122,7 +148,7 @@ begin
 		select 1;
 	end if;
 end; $$
-DELIMITER
+DELIMITER ;
 
 Drop procedure if Exists getInfo;
 Delimiter $$
@@ -136,7 +162,7 @@ begin
 		select name, email, phonenumber, gender, role1 from user where user_id=user_id1;
 	end if;
 end; $$
-DELIMITER
+DELIMITER ;
 
 Drop procedure if Exists changePassword;
 Delimiter $$
@@ -153,7 +179,7 @@ begin
 		select 1;
 	end if;
 end; $$
-DELIMITER
+DELIMITER ;
 
 Drop procedure if Exists addCoupon;
 Delimiter $$
@@ -173,7 +199,7 @@ begin
 		select 1;
 	end if;
 end;  $$
-DELIMITER
+DELIMITER ;
 call addcoupon("QN-05","2011-12-18 13:17:17","2011-12-19 13:17:17",10000);
 
 Drop procedure if Exists modifyCoupon;
@@ -192,8 +218,8 @@ begin
 		set start1=start, end1=end, value=value1 where coupon_id=coupon_id1;
 		select 1;
 	end if;
-end;  $$
-DELIMITER
+end;  $$ 
+DELIMITER ;
 call modifycoupon("QN-04","2011-12-18 13:17:17","2011-12-19 13:17:17",15000);
 
 Drop procedure if Exists deleteCoupon;
@@ -209,7 +235,7 @@ begin
 		select 1;
 	end if;
 end;  $$
-DELIMITER
+DELIMITER ;
 call deleteCoupon("QN-05");
 
 Drop procedure if Exists showcouponUser;
@@ -224,7 +250,7 @@ begin
 		select * from coupon where coupon_id in (select coupon_id from usercoupon where user_id =user_id1);
 	end if;
 end;  $$
-DELIMITER
+DELIMITER ;
 
 
 
@@ -250,7 +276,7 @@ begin
 	end if;
 end;
 $$
-DELIMITER
+DELIMITER ;
 call addfood('112','test','Ngon', 123);
 Drop procedure if exists setfood;
 DELIMITER $$
@@ -262,7 +288,7 @@ begin
 	update food set status =status1 where food_id=food_id1;
 	SELECT 1;
 end; $$
-DELIMITER
+DELIMITER ;
 
 CALL setfood(5,true);
 
@@ -285,7 +311,7 @@ begin
 	end if;
 end
 $$
-DELIMITER
+DELIMITER ;
 
 Drop procedure if exists deletefood;
 DELIMITER $$
@@ -301,7 +327,7 @@ begin
 	end if;
 end
 $$
-DELIMITER
+DELIMITER ;
 
 Drop procedure if exists getFood;
 DELIMITER $$
@@ -311,7 +337,7 @@ begin
 	select * from food ;
 end
 $$
-DELIMITER
+Delimiter ;
 
 Drop procedure if exists modifyOrder;
 DELIMITER $$
@@ -337,7 +363,7 @@ begin
 	end if;
 	end
 $$
-DELIMITER
+DELIMITER ;
 
 Drop procedure if exists addOrder;
 DELIMITER $$
@@ -354,7 +380,7 @@ begin
 		elseif(!exists(select * from user where user_id=user_id1))then
 			select -1;
 		else
-			if(exists(SELECT * from orderlist where food_id=food_id1 and user_id=user_id1 and status2=0))THEN 
+			if(exists(SELECT * from orderlist where food_id=food_id1 and user_id=user_id1 and status2=1))THEN 
 				UPDATE orderlist set num=num+num1,time1=time where food_id=food_id1 and user_id=user_id1 and status2=0;
 			else
 			INSERT into orderlist (user_id ,food_id ,num ,time1,status2 )
@@ -365,7 +391,7 @@ begin
 	end if;
 	end
 	$$
-DELIMITER
+Delimiter ;
 
 Drop procedure if exists deleteOrder;
 DELIMITER $$
@@ -381,7 +407,7 @@ begin
 	end if;
 	end
 	$$
-DELIMITER
+Delimiter ;
 
 Drop procedure if exists showOrderUser;
 DELIMITER $$
@@ -396,7 +422,7 @@ begin
 	end if;
 end
 	$$
-DELIMITER
+Delimiter ;
 
 Drop procedure if exists addSession;
 DELIMITER $$
@@ -421,7 +447,7 @@ begin
 	end if;
 end
 	$$
-DELIMITER
+Delimiter ;
 
 Drop procedure if exists getUser_id;
 DELIMITER $$
@@ -436,29 +462,31 @@ begin
 	end if;
 end
 	$$
-DELIMITER
+Delimiter ;
 
 Drop procedure if exists addCouponUser;
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `smartfood`.`addCouponUser`(
-	user_id1 int,
-	coupon_id1 varchar(50)
+	user_id int,
+	coupon_id varchar(50),
+	num int
 )
 begin
-	if(!exists(select * from coupon where coupon_id=coupon_id1))then
+	if(!exists(select * from coupon where coupon.coupon_id=coupon_id))then
 		select -1;
-	elseif(!exists(select * from user where user_id=user_id1)) THEN 
+	elseif(!exists(select * from user where user.user_id=user_id)) THEN 
 		select -1;
 	else 
-		INSERT into usercoupon (user_id ,coupon_id ) 
+		INSERT into usercoupon (user_id1 ,coupon_id1,num1 ) 
 		values
-		(user_id1,coupon_id1);
+		(user_id,coupon_id,num);
 		select 1;
 	end if;
 end
 	$$
-DELIMITER
+Delimiter ;
 call addUser('Nguyễn Minh Quang','132342','123','123',1,2);
+call addUser('admin','admin','admin','admin',1,4);
 select * from user;
 call getInfo(17);
 
@@ -477,5 +505,35 @@ begin
 		SELECT role1 from user where user_id =user_id1;
 	end if;
 end;	$$
-DELIMITER
+DELIMITER ;
+
+Drop procedure if exists addCouponUser;
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `smartfood`.`addCouponUser`(
+	user_id int,
+	coupon_id varchar(50),
+	num int
+)
+begin
+	if(!exists(select * from coupon where coupon.coupon_id=coupon_id))then
+		select -1;
+	elseif(!exists(select * from user where user.user_id=user_id)) THEN 
+		select -1;
+	elseif(exists(select * from usercoupon where usercoupon.user_id=user_id and usercoupon.coupon_id=coupon_id))THEN 
+		UPDATE usercoupon set usercoupon.num=usercoupon.num+num where usercoupon.user_id=user_id and usercoupon.coupon_id=coupon_id;
+	else
+		INSERT into usercoupon (user_id ,coupon_id,num ) 
+		values
+		(user_id,coupon_id,num);
+		select 1;
+	end if;
+end
+	$$
+Delimiter ;	
+
+Select * from coupon;
+Select * from usercoupon;
+INSERT INto coupon(coupon_id ,start1 ,end1 ,value ) values('ad-123','2019-12-30 00:00:00','2019-12-30 00:00:00',20000);
+call addCouponUser(3,'ad-123',4);
+
 
