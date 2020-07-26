@@ -122,6 +122,7 @@ $role = $check['role1'];
 								<ul class="sub_menu">
 									<li><a href="vendorOwner.php">for Owner</a></li>
 									<li><a href="cook.php">for Cheff</a></li>
+									<li><a href="ITstaff.html">for IT Staff</a></li>
 
 								</ul>
 							</li>
