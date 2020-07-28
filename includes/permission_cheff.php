@@ -6,7 +6,7 @@
 	}else {
 	$conn=mysqli_connect("localhost","root","root");
 	if(!$conn){
-		die(mysql_error());
+		die(mysqli_error($conn));
 	}
 	$value=$_SESSION['value'];
 	$result=mysqli_select_db($conn,"smartfood");
@@ -23,7 +23,7 @@
 		if ($role!= '2') {
 			// Nếu không phải admin thì xuất thông báo
 			echo "Bạn không đủ quyền truy cập vào trang này<br>";
-			echo "<a href='index.html'> Click để về lại trang chủ</a>";
+			echo "<a href='index.php'> Click để về lại trang chủ</a>";
 			exit();
 		}
 	}
