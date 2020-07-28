@@ -6,7 +6,7 @@ if (isset($_SESSION['loggedin']) == false) {
 }else {
 	$conn=mysqli_connect("localhost","root","root");
 	if(!$conn){
-		die(mysql_error());
+		die(mysqli_error($conn));
 	}
 	$value=$_SESSION['value'];
 	$result=mysqli_select_db($conn,"smartfood");
