@@ -1,5 +1,6 @@
 <?php
     //session_start();
+    include("includes/permission_it.php");
 
 ?>
 <!DOCTYPE html>
