@@ -1,6 +1,5 @@
 <?php
     //session_start();
-    include("includes/check-shutdown.php");
 
 ?>
 <!DOCTYPE html>
