@@ -1,4 +1,9 @@
 <?php include "./phpModules/getUser.php"; ?>
+<?php
+    //session_start();
+    include("includes/check-shutdown.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -101,7 +106,7 @@
 								<ul class="sub_menu">
 									<li><a href="vendorOwner.php">for Owner</a></li>
 									<li><a href="cook.php">for Cheff</a></li>
-									<li><a href="ITstaff.html">for IT Staff</a></li>
+									<li><a href="ITstaff.php">for IT Staff</a></li>
 								</ul>
 							</li>
 
@@ -238,29 +243,21 @@
 					-->
 					<li class="item-menu-mobile">
 						<a href="index.php">Home</a>
-						<ul class="sub-menu">
-							<li><a href="index.php">Homepage V1</a></li>
-							
-						</ul>
-						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+						
 					</li>
 
 					<li class="item-menu-mobile">
 						<a href="product.php">Shop</a>
 					</li>
-
 					<li class="item-menu-mobile">
-						<a href="product.php">Sale</a>
+						<a>Features</a>
+						<ul class="sub-menu">
+							<li><a href="vendorOwner.php">for Owner</a></li>
+							<li><a href="cook.php">for Cheff</a></li>
+							<li><a href="ITstaff.php">for IT Staff</a></li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 					</li>
-
-					<li class="item-menu-mobile">
-						<a href="cart.php">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.php">Blog</a>
-					</li>
-
 					<li class="item-menu-mobile">
 						<a href="about.php">About</a>
 					</li>

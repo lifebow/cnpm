@@ -1,3 +1,8 @@
+<?php
+    include("includes/check-shutdown.php");
+
+?>
+
 <!DOCTYPE html>
 <html>
 <style>

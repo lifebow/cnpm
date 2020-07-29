@@ -1,39 +1,12 @@
 <?php
-    session_start();
+    //session_start();
     include("includes/check-shutdown.php");
-//read file shutsown-log.txt
-    $myfile = fopen("shutdown-log.txt", "r") or die("Unable to open file!");
-    $date_shutdown=fgets($myfile);
-    $day_shutdown=substr($date_shutdown,0,2);
-    $month_shutdown=substr($date_shutdown,3,2);
-    $year_shutdown=substr($date_shutdown,6,4);
-    $date_shutdown=$year_shutdown.'-'.$month_shutdown.'-'.$day_shutdown;
-    $time_shutdown=fgets($myfile);
-    fclose($myfile);
-//read file restart-log.txt
-    $myfile = fopen("restart-log.txt", "r") or die("Unable to open file!");
-    $date_restart=fgets($myfile);
-    $day_restart=substr($date_restart,0,2);
-    $month_restart=substr($date_restart,3,2);
-    $year_restart=substr($date_restart,6,4);
-    $date_restart=$year_restart.'-'.$month_restart.'-'.$day_restart;
-    $time_restart=fgets($myfile);
-    fclose($myfile);
-    $shutdown=new DateTime($date_shutdown.' '.$time_shutdown);
-    $current=new DateTime(date("Y-m-d H:i"));
-    $restart=new DateTime($date_restart.' '.$time_restart);
-    $check=true;
-    if ($shutdown<=$current && $current<=$restart){
-        $check=false;
-    } else {
-        $check=true;
-    }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>IT Staff</title>
+	<title>Nhân viên IT</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -57,7 +30,11 @@
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
 <!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/slick/slick.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/lightbox2/css/lightbox.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
@@ -131,7 +108,6 @@
 									<li><a href="vendorOwner.php">for Owner</a></li>
 									<li><a href="cook.php">for Cheff</a></li>
 									<li><a href="ITstaff.php">for IT Staff</a></li>
-								
 								</ul>
 							</li>
 
@@ -256,7 +232,7 @@
 			<div class="btn-show-menu">
 				<!-- Header Icon mobile -->
 				<div class="header-icons-mobile">
-					<a href="#" class="header-wrapicon1 dis-block">
+					<a href="manageaccount.php" class="header-wrapicon1 dis-block">
 						<img src="images/icons/icon-header-01.png" class="header-icon1" alt="ICON">
 					</a>
 
@@ -387,29 +363,21 @@
 					-->
 					<li class="item-menu-mobile">
 						<a href="index.php">Home</a>
-						<ul class="sub-menu">
-							<li><a href="index.php">Homepage V1</a></li>
-							
-						</ul>
-						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+						
 					</li>
 
 					<li class="item-menu-mobile">
 						<a href="product.php">Shop</a>
 					</li>
-
 					<li class="item-menu-mobile">
-						<a href="product.php">Sale</a>
+						<a>Features</a>
+						<ul class="sub-menu">
+							<li><a href="vendorOwner.php">for Owner</a></li>
+							<li><a href="cook.php">for Cheff</a></li>
+							<li><a href="ITstaff.php">for IT Staff</a></li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 					</li>
-
-					<li class="item-menu-mobile">
-						<a href="cart.php">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.php">Blog</a>
-					</li>
-
 					<li class="item-menu-mobile">
 						<a href="about.php">About</a>
 					</li>
@@ -421,6 +389,11 @@
 			</nav>
 		</div>
 	</header>
+
+
+	
+    <!-- Slide1 -->
+    <!--End of Header Area-->
 
 <!--content start-->
     <!-- Button trigger modal -->
@@ -449,7 +422,11 @@
                         <div class="form-group">
                             <label class="control-label" for="time-shutdown">Giờ</label>
                             <input type="text" value="" name="time-shutdown" id="time-shutdown" placeholder="12:30"  class="form-control">
-                        </div>
+						</div>
+						<div>
+							<input type="checkbox" id="shutdown-now" name="shutdown-now" value="true">
+  							<label for="shutdown-now">Ngay lập tức</label><br>
+						</div>
                     
                 </div>
                 <div class="modal-footer">
@@ -492,7 +469,11 @@
                             <div class="form-group">
                                 <label class="control-label" for="time-restart">Giờ</label>
                                 <input type="text" value="" name="time-restart" id="time-restart" placeholder="12:30"  class="form-control">
-                            </div>
+							</div>
+							<div>
+								<input type="checkbox" id="restart-now" name="restart-now" value="true">
+  								<label for="restart-now">Ngay lập tức</label><br>
+							</div>
                         
                     </div>
                     <div class="modal-footer">
