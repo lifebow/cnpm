@@ -9,18 +9,16 @@ $array = json_decode($config, true);
 include "../common/helper.php";
 $endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
 require_once  '../vendor/autoload.php' ;
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->load();
 
-
+$actual_link = 
 $partnerCode = $array["partnerCode"];
 $accessKey = $array["accessKey"];
 $secretKey = $array["secretKey"];
 $orderInfo = "Thanh toán qua MoMo";
 $amount = "10000";
 $orderId = time() ."";
-$returnUrl = $_ENV['RETURL'];
-$notifyurl = $_ENV['NOTURL'];
+$returnUrl = str_replace("init_payment.php","result.php","http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+$notifyurl = str_replace("init_payment.php","ipn_momo.php","http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
 // Lưu ý: link notifyUrl không phải là dạng localhost
 $extraData = "merchantName=MoMo Partner";
 
@@ -32,8 +30,8 @@ if (!empty($_POST)) {
     $orderInfo = "Thanh toán qua MoMo";
     $orderId = $_POST["orderId"]; // Mã đơn hàng
     $amount = $_POST["amount"];
-    $returnUrl = $_ENV['RETURL'];
-    $notifyurl = $_ENV['NOTURL'];
+    $returnUrl = str_replace("init_payment.php","result.php","http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
+    $notifyurl = str_replace("init_payment.php","ipn_momo.php","http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]");
     $extraData = "merchantName=MoMo Partner";
 
     $requestId = time() . "";

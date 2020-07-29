@@ -20,7 +20,7 @@ if (isset($_SESSION['loggedin']) == false) {
 	$role=$check['role1'];
 	if (isset($role) == true) {
 		// Ngược lại nếu đã đăng nhập		// Kiểm tra quyền của người đó có phải là admin hay không
-		if ($role != '2') {
+		if ($role != '1') {
 			// Nếu không phải admin thì xuất thông báo
 			echo "Bạn không đủ quyền truy cập vào trang này<br>";
 			echo "<a href='index.php'> Click để về lại trang chủ</a>";
