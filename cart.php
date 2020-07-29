@@ -226,7 +226,7 @@ $role = $check['role1'];
 		</div>
 
 		<!-- Menu Mobile -->
-		<div class="wrap-side-menu">
+		<div class="wrap-side-menu" >
 			<nav class="side-menu">
 				<ul class="main-menu">
 					<li class="item-topbar-mobile p-l-20 p-t-8 p-b-8">
@@ -240,6 +240,7 @@ $role = $check['role1'];
 							<span class="topbar-email">
 								fashe@example.com
 							</span>
+
 							<div class="topbar-language rs1-select2">
 								<select class="selection-1" name="time">
 									<option>USD</option>
@@ -261,29 +262,21 @@ $role = $check['role1'];
 					-->
 					<li class="item-menu-mobile">
 						<a href="index.php">Home</a>
-						<ul class="sub-menu">
-							<li><a href="index.php">Homepage V1</a></li>
-
-						</ul>
-						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
+						
 					</li>
 
 					<li class="item-menu-mobile">
 						<a href="product.php">Shop</a>
 					</li>
-
 					<li class="item-menu-mobile">
-						<a href="product.php">Sale</a>
+						<a>Features</a>
+						<ul class="sub-menu">
+							<li><a href="vendorOwner.php">for Owner</a></li>
+							<li><a href="cook.php">for Cheff</a></li>
+							<li><a href="ITstaff.php">for IT Staff</a></li>
+						</ul>
+						<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 					</li>
-
-					<li class="item-menu-mobile">
-						<a href="cart.php">Features</a>
-					</li>
-
-					<li class="item-menu-mobile">
-						<a href="blog.php">Blog</a>
-					</li>
-
 					<li class="item-menu-mobile">
 						<a href="about.php">About</a>
 					</li>
