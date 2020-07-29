@@ -57,8 +57,23 @@
 				else{
 					$result=mysqli_query($conn,"update sessionlogin set value='$value' where user_id='$user_id'");
 				}
-				//$_SESSION['role']=$rol/e;
-				header("refresh: 1;url=./index.php");
+				$result=mysqli_query($conn,"select role1 from user where user_id='$user_id';");
+				$check=mysqli_fetch_array($result);
+				$role=$check['role1'];
+				switch ($role) {
+					case 1:
+						header("refresh: 1;url=./ITstaff.php");
+						break;
+					case 2:
+						header("refresh: 1;url=./cook.php");
+						break;
+					case 3: 
+						header("refresh: 1;url=./index.php");
+						break;
+					case 4: 
+						header("refresh: 1;url=./vendorOwner.php");
+						break;
+				};
 			}
 		}
 	}

@@ -18,10 +18,10 @@ $date_restart=$year_restart.'-'.$month_restart.'-'.$day_restart;
 $time_restart=fgets($myfile);
 fclose($myfile);
 $shutdown=new DateTime($date_shutdown.' '.$time_shutdown);
-$current=new DateTime(date("Y-m-d H:i"));
+$current=new DateTime(date("Y-m-d H:i:s"));
 $restart=new DateTime($date_restart.' '.$time_restart);
 $check=true;
-if ($shutdown<$current && $current<$restart){
+if (($shutdown<$current && $current<$restart)||($shutdown>$restart && $shutdown<=$current)){
     $check=false;
 } else {
     $check=true;

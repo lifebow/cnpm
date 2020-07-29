@@ -772,14 +772,14 @@
                     		<thead>
                     		  <tr>
                               <th scope="col">Coupon ID</th>
-							  <th scope="col">User ID</th>
+							  <th scope="col">Tên khách hàng</th>
 							  <th scope="col">Số lượng</th>
                               </tr>
                     		</thead>
                     		<tbody>
                     			<tr>
                     				<td><input type="text" style="border: 1px solid #ccc !important;" id="gift_coupon_id"></td>
-									<td><input type="text" style="border: 1px solid #ccc !important;" id="gift_user_id"></td>
+									<td><input type="text" style="border: 1px solid #ccc !important;" id="gift_name"></td>
 									<td><input type="text" style="border: 1px solid #ccc !important;" id="gift_num"></td>
                     				<td><button id="button-gift-coupon" type="button" class="btn btn-primary">Tặng</button></td>
                     			</tr>
@@ -1326,11 +1326,11 @@
             });
     });
     $("#button-gift-coupon").click(() => {
-		var user_id  = $("#gift_user_id").val();
+		var name  = $("#gift_name").val();
 		var coupon_id = $("#gift_coupon_id").val();
 		var num = $("#gift_num").val();
 		var postData = new FormData();
-		postData.append("user", user_id);
+		postData.append("name", name);
 		postData.append("coupon", coupon_id);
 		postData.append("num", num);
 		$.ajax({

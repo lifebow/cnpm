@@ -13,7 +13,7 @@ body, html {
 
 .bgimg {
   background-image: url("/cnpm-backend/images/maintenance.jpg");
-  background-color: blueviolet;
+  background-color: #3df5ae;
   height: 100%;
   background-position: center;
   background-size: cover;
