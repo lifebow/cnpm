@@ -30,4 +30,3 @@ if ($shutdown<$current && $current<$restart){
     if ($check == false) {
         header( "Location: warning.php");
     }
-?>

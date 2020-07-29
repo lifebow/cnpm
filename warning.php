@@ -1,5 +1,5 @@
 <?php
-    include("includes/check-shutdown.php");
+
 
 ?>
 
@@ -85,7 +85,7 @@ hr {
 
 <div class="bgimg">
     <div class="topleft">
-        <a href="index.html">
+        <a href="index.php">
             <img src="images/icons/logo.png" alt="IMG-LOGO">
         </a>
     </div>
