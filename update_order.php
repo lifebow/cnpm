@@ -1,5 +1,4 @@
 <?php
-	var_dump($_POST);
 	$order_id=$_POST['order_id'];
 	$num=$_POST['num'];
 	$conn=mysqli_connect("localhost","root","root");

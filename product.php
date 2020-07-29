@@ -633,7 +633,6 @@
                 success: function(msg){
                 	swal(nameProduct, "is added to cart !", "success");
 					$('.header-icons-noti').html(parseInt($('.header-icons-noti').html()) + 1);
-                //alert(msg);
                 },
                 error: function(){
                     alert("failure");

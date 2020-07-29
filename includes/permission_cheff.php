@@ -18,7 +18,6 @@
 	$result=mysqli_query($conn,"call getRole('$user_id');");
 	$check=mysqli_fetch_array($result);
 	$role=$check['role1'];
-	var_dump($role);
 	if (isset($role) == true) {
 		if ($role!= '2') {
 			// Nếu không phải admin thì xuất thông báo
