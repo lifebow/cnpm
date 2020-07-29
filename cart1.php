@@ -15,6 +15,11 @@ $result = mysqli_query($conn, "call getRole('$user_id');");
 $check = mysqli_fetch_array($result);
 $role = $check['role1'];
 ?>
+<?php
+    //session_start();
+    include("includes/check-shutdown.php");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,13 +144,8 @@ $role = $check['role1'];
 					
 				<?php include "./phpModules/checkLoggedIn.php"; ?>
 
-<<<<<<< HEAD
-					
-=======
-				<?php include "./phpModules/checkLoggedIn.php"; ?>
 
 
->>>>>>> 86152977489beadf857d9262956087a387685aef
 					<span class="linedivide1"></span>
 
 					<a href="manageaccount.php" class="header-wrapicon1 dis-block">
@@ -167,13 +167,8 @@ $role = $check['role1'];
 
 								<div class="header-cart-wrapbtn">
 									<!-- Button -->
-<<<<<<< HEAD
-									<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-										Check Out
-=======
 									<a href="myOrder.php" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
 										My meal
->>>>>>> 86152977489beadf857d9262956087a387685aef
 									</a>
 								</div>
 							</div>

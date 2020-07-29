@@ -1,5 +1,9 @@
 <?php include "./phpModules/getUser.php"; ?>
+<?php
+    //session_start();
+    include("includes/check-shutdown.php");
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -100,7 +104,7 @@
 								<ul class="sub_menu">
 									<li><a href="vendorOwner.php">for Owner</a></li>
 									<li><a href="cook.php">for Cheff</a></li>
-									<li><a href="ITstaff.html">for IT Staff</a></li>
+									<li><a href="ITstaff.php">for IT Staff</a></li>
 								</ul>
 							</li>
 
