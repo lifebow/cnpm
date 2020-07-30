@@ -80,10 +80,10 @@ include("includes/check-shutdown.php");
 					<table class="table-shopping-cart" id="table_item">
 						<tr class="table-head">
 							<th class="column-1"></th>
-							<th class="column-2">Product</th>
-							<th class="column-3">Price</th>
-							<th class="column-4 p-l-70">Quantity</th>
-							<th class="column-5">Total</th>
+							<th class="column-2">Sản phẩm</th>
+							<th class="column-3">Giá</th>
+							<th class="column-4 p-l-70">Số lượng</th>
+							<th class="column-5">Tổng</th>
 						</tr>
 						<?php
 						$conn = mysqli_connect("localhost", "root", "root");
@@ -160,7 +160,7 @@ include("includes/check-shutdown.php");
 					<div class="size12 trans-0-4 m-t-10 m-b-10 m-r-10">
 						<!-- Button -->
 						<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" id="button-apply">
-							Apply coupon
+							Áp dụng mã giảm giá
 						</button>
 					</div>
 				</div>
@@ -168,13 +168,13 @@ include("includes/check-shutdown.php");
 				<div class="size10 trans-0-4 m-t-10 m-b-10">
 					<!-- Button -->
 					<button class="flex-c-m sizefull bg1 bo-rad-23 hov1 s-text1 trans-0-4" id="button-update" name="update">
-						Update Cart
+						Cập nhật giỏ hàng
 					</button>
 				</div>
 			</div>
 			<!--list of coupon can use-->
 			<h3 class="m-text20 p-b-24">
-				Mã coupon của bạn
+				Mã giảm giá của bạn
 			</h3>
 			<div class="container">
 				<div class="row">
@@ -184,7 +184,7 @@ include("includes/check-shutdown.php");
 								<thead>
 									<tr>
 										<th class="column-1">#</th>
-										<th class="column-2">Mã coupon</th>
+										<th class="column-2">Mã giảm giá</th>
 										<th class="column-3">Giá trị</th>
 										<th class="column-4 p-l-70">Hạn sử dụng</th>
 										<th class="column-5">Số lượng</th>

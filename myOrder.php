@@ -76,8 +76,8 @@ $role = $check['role1'];
 	<body>
 		<div class="container">
 			<ul class="justify-content-center nav nav-tabs list-inline">
-				<li class="active list-group-item" data-toggle="tab" href="#myOrder">Bữa ăn của tôi</li>
-				<li class="list-group-item" data-toggle="tab" href="#myCoupon">Coupon của tôi</li>
+				<li class="active list-group-item" data-toggle="tab" href="#myOrder">Bữa ăn của tôi</li>	
+				<li class="list-group-item" data-toggle="tab" href="#myCoupon">Mã giảm giá của tôi</li>
 			</ul>
 			<div class="tab-content">
 				<!--table of order-->
@@ -140,7 +140,7 @@ $role = $check['role1'];
 						<thead>
 							<tr>
 								<th class="column-1">#</th>
-								<th class="column-2">Mã coupon</th>
+								<th class="column-2">Mã giảm giá</th>
 								<th class="column-3">Giá trị</th>
 								<th class="column-4 p-l-70">Hạn sử dụng</th>
 								<th class="column-5">Số lượng</th>
