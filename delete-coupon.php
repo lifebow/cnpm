@@ -1,6 +1,8 @@
 <?php 
-	$id = $_POST['coupon_id'];
-	$conn=mysqli_connect("localhost","root","root");
+
+$id = $_POST['coupon_id'];
+
+$conn=mysqli_connect("localhost","root","root");
 	if(!$conn){
 		die(mysqli_error($conn));
 	}
