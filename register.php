@@ -8,25 +8,25 @@
 			$phoneNumber=$customer['phoneNumber'];
 			$password = $customer['password'];
 			if (strlen($name) <2 || strlen($name)>40) {
-				echo "register failed";
+				echo "Sai tên";
 				return;
 			}
 			if (strlen($email) == 0) {
-				echo "register failed";
+				echo "Sai email";
 				return;
 			}
 			if (strlen($password) <2 || strlen($password)>30) {
-				echo "register failed";
+				echo "Chiều dài mật khẩu không đúng";
 				return;
 			}
 			$email_format = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 			if (!preg_match($email_format,$email)) {
-				echo "register failed";
+				echo "Sai email";
 				return;
 			}
 			$phone_format = '/^[0-9]{10}$/';
 			if (!preg_match($phone_format,$phoneNumber)) {
-	    		echo "register failed";
+	    		echo "Số điện thoại không đúng";
 	    		return;
 	    	}
 
@@ -44,11 +44,11 @@
 			$check=mysqli_fetch_array($result);
 			//echo $check[0];
 			if($check[0]==-1){
-				echo "Email has registered!";
+				echo "Email đã được dùng!";
 				header("refresh: 1;url=./register.html");
 			}
 			else{
-				echo "Success";
+				echo "Thành công";
 				header("refresh: 1;url=./login.html");
 			}
 		}

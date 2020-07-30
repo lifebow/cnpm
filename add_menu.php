@@ -89,7 +89,7 @@ if ($allowUpload) {
                 }
             }
             else{
-                echo "Error to call function";
+                echo "Lỗi gọi hàm";
                 unlink(($target_dir.$image));
             }
     }

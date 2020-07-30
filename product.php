@@ -68,12 +68,12 @@ include("includes/header.php");
 
 						<!--  -->
 						<h4 class="m-text14 p-b-32">
-							Filters
+							Lọc
 						</h4>
 
 						<div class="filter-price p-t-22 p-b-50 bo3">
 							<div class="m-text15 p-b-17">
-								Price
+								Giá
 							</div>
 
 							<div class="wra-filter-bar">
@@ -84,7 +84,7 @@ include("includes/header.php");
 								<div class="w-size11">
 									<!-- Button -->
 									<button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4 price-filter">
-										Filter
+										Lọc
 									</button>
 								</div>
 
@@ -95,7 +95,7 @@ include("includes/header.php");
 						</div>
 
 						<div class="search-product pos-relative bo4 of-hidden">
-							<input class="s-text7 size6 p-l-23 p-r-50 search-product-input" type="text" name="search-product" placeholder="Search Products...">
+							<input class="s-text7 size6 p-l-23 p-r-50 search-product-input" type="text" name="search-product" placeholder="Tìm	"...">
 
 							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4 search-product-button">
 								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
@@ -110,16 +110,14 @@ include("includes/header.php");
 						<div class="flex-w">
 							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
 								<select class="selection-2 sort-product" name="sorting">
-									<option value='default'>Default Sorting</option>
-									<option value='lowFirst'>Price: low to high</option>
-									<option value='highFirst'>Price: high to low</option>
+									<option value='default'>Lọc theo</option>
+									<option value='lowFirst'>Giá: từ nhỏ đến lớn</option>
+									<option value='highFirst'>Giá: từ lớn đến nhỏ</option>
 								</select>
 							</div>
 						</div>
 
-						<span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
-						</span>
+
 					</div>
 
 					<!-- Product -->
@@ -153,7 +151,7 @@ include("includes/header.php");
 										<div class="block2-btn-addcart w-size1 trans-0-4">
 											<!-- Button -->
 											<button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-												Add to Cart
+												Thêm vào giỏ hàng
 											</button>
 										</div>
 									</div>
@@ -191,161 +189,7 @@ include("includes/header.php");
 
 
 	<!-- Footer -->
-	<footer class="bg6 p-t-45 p-b-43 p-l-45 p-r-45">
-		<div class="flex-w p-b-90">
-			<div class="w-size6 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					GET IN TOUCH
-				</h4>
-
-				<div>
-					<p class="s-text7 w-size27">
-						Any questions? Let us know in store at 268 Ly Thuong Kiet, Ward 14, District 10, Ho Chi Minh 
-					</p>
-					<!--
-					<div class="flex-m p-t-30">
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-facebook"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-instagram"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-pinterest-p"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-snapchat-ghost"></a>
-						<a href="#" class="fs-18 color1 p-r-20 fa fa-youtube-play"></a>
-					</div>
-					-->
-				</div>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Categories
-				</h4>
-
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Food
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Drink
-						</a>
-					</li>
-
-				</ul>
-			</div>
-			<!--
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Links
-				</h4>
-
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Search
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							About Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Contact Us
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-				</ul>
-			</div>
-
-			<div class="w-size7 p-t-30 p-l-15 p-r-15 respon4">
-				<h4 class="s-text12 p-b-30">
-					Help
-				</h4>
-
-				<ul>
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Track Order
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Returns
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							Shipping
-						</a>
-					</li>
-
-					<li class="p-b-9">
-						<a href="#" class="s-text7">
-							FAQs
-						</a>
-					</li>
-				</ul>
-			</div>
-			-->
-			<div class="w-size8 p-t-30 p-l-15 p-r-15 respon3">
-				<h4 class="s-text12 p-b-30">
-					Newsletter
-				</h4>
-
-				<form>
-					<div class="effect1 w-size9">
-						<input class="s-text7 bg6 w-full p-b-5" type="text" name="email" placeholder="email@example.com">
-						<span class="effect1-line"></span> 
-					</div>
-
-					<div class="w-size2 p-t-20">
-			
-						<!-- Button -->
-						<button class="flex-c-m size2 bg4 bo-rad-23 hov1 m-text3 trans-0-4">
-							Subscribe
-						</button>
-					</div>
-
-				</form>
-			</div>
-
-		</div>
-
-		<div class="t-center p-l-15 p-r-15">
-			<a href="#">
-				<img class="h-size2" src="images/icons/paypal.png" alt="IMG-PAYPAL">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/visa.png" alt="IMG-VISA">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/mastercard.png" alt="IMG-MASTERCARD">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/express.png" alt="IMG-EXPRESS">
-			</a>
-
-			<a href="#">
-				<img class="h-size2" src="images/icons/discover.png" alt="IMG-DISCOVER">
-			</a>
-
-		</div>
-	</footer>
+	<?php include("includes/footer.php");?>
 
 
 

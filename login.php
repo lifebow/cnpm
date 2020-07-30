@@ -16,16 +16,16 @@
 			$password=$customer['password'];	
 			$conn=mysqli_connect("localhost","root","root");
 			if (strlen($email) == 0) {
-				echo "login failed!";
+				echo "Sai email!";
 				return;
 			}
 			if (strlen($password) <2 || strlen($password)>30) {
-				echo "login failed!";
+				echo "Sai mật khẩu!";
 				return;
 			}
 			$emailformat = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 			if (!preg_match($emailformat,$email)) {
-				echo "login failed!";
+				echo "Sai email!";
 				return;
 			}
 			if(!$conn){
@@ -40,7 +40,7 @@
 			$check=mysqli_fetch_array($result);
 			$user_id=$check['user_id'];
 			if(is_null($check)){
-				echo "login failed!";
+				echo "Đăng không thành công!";
 				header("refresh: 1;url=./login.html");
 			}
 			else{
